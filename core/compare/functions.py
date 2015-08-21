@@ -52,11 +52,10 @@ def equalWithEpsilon(output, answer):
     
     return int(abs(out-ans) < 1e-6)
     
-    def equalIgnoreSpace(output, answer, *args, **kargs):
+def equalIgnoreSpace(output, answer, *args, **kargs):
     return compareIgnoreSpace(output, answer, equal)
 config.update(equalIgnoreSpace)    
     
 def equalIgnoreSpaceEpsilon(output, answer, *args, **kargs):
     return compareIgnoreSpace(output, answer, equalWithEpsilon)
 config.update(equalIgnoreSpaceEpsilon)
-               
