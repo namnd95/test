@@ -2,13 +2,13 @@ import config
 from result import Result
 
 
-def compare_line_ignore_space(line, out, ans, compare_function, **kagrs):
+def compare_line_ignore_space(line, out, ans, compare_function, **kargs):
     out = out.split()
     ans = ans.split()
     if len(out) != len(ans):
         return Result(score=0, verdict='Line %d length mismatch' % line)
     for i in xrange(len(out)):
-        if compare_function(out[i], ans[i], **kargs):
+        if not compare_function(out[i], ans[i], **kargs):
             return Result(
                 score=0,
                 verdict='Line %d at %d output %s answer %s' %
