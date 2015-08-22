@@ -1,3 +1,3 @@
-from compare import config
+from config import config
 
-from compare import functions
+import functions
