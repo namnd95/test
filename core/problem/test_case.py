@@ -1,6 +1,8 @@
 class TestCase:
 
-    def __init__(self, id, file_in, file_out, time_limit, mem_limit, score):
+    def __init__(self,
+                 id, file_in, file_out,
+                 time_limit=None, mem_limit=None, score=None):
         self.id = id
         self.file_in = file_in
         self.file_out = file_out
