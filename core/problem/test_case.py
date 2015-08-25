@@ -17,11 +17,20 @@ class TestCase:
     def get_file_out(self):
         return self.file_out
 
-    def get_time_limit(self):
-        return self.time_limit
+    def get_time_limit(self, default_test_case=None):
+        if self.time_limit is not None:
+            return self.time_limit
+        else:
+            return default_test_case.time_limit
 
-    def get_mem_limit(self):
-        return self.mem_limit
+    def get_mem_limit(self, default_test_case=None):
+        if self.mem_limit is not None:
+            return self.mem_limit
+        else:
+            return default_test_case.mem_limit
 
-    def get_score(self):
-        return self.score
+    def get_score(self, default_test_case=None):
+        if self.score is not None:
+            return self.score
+        else:
+            return default_test_case.score
