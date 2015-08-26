@@ -18,6 +18,7 @@ def load_themis_test_cases(id, directory):
             file_in=path + file_in,
             file_out=path + file_out
         ))
+    return test_cases
 
 
 def load_normal_test_cases(id, directory):
@@ -43,3 +44,4 @@ def load_normal_test_cases(id, directory):
             file_in=path + file_in,
             file_out=path + file_out
         ))
+    return test_cases
