@@ -27,5 +27,8 @@ class TestFunction(unittest.TestCase):
         ))
 
 
+def suite():
+    return unittest.TestLoader().loadTestsFromTestCase(TestFunction)
+
 if __name__ == '__main__':
-    unittest.main()
+    unittest.TextTestRunner(verbosity=2).run(suite())
