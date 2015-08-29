@@ -40,7 +40,7 @@ def load_normal_test_cases(id, directory):
         file_in = list_file_in[i]
         file_out = list_file_out[i]
         test_cases.append(TestCase(
-            id=file_in,
+            id=get_name_part(file_in),
             file_in=path + file_in,
             file_out=path + file_out
         ))
