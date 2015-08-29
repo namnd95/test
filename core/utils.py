@@ -67,3 +67,11 @@ def get_list_file(directory):
 
 def get_list_dir(directory):
     return os.walk(directory).next()[1]
+
+
+def get_name_part(file_name):
+    seperation_index = file_name.rfind('.')
+    if seperation_index == -1:
+        return file_name
+    else:
+        return file_name[:seperation_index]
