@@ -17,9 +17,11 @@ class Language:
 
 class ProblemConfig:
 
-    def __init__(self, stdin=True, stdout=True, language={}, **kargs):
+    def __init__(self, stdin=True, stdout=True, stop=False,
+                 language={}, **kargs):
         self.stdin = stdin
         self.stdout = stdout
+        self.stop = stop
         self.language = {}
         for key, value in language.iteritems():
             self.language[key] = Language(**value)
@@ -39,6 +41,9 @@ class ProblemConfig:
 
     def get_stdout(self):
         return self.stdout
+
+    def can_stop(self):
+        return self.stop
 
     def get_language(self):
         return self.language
