@@ -1,5 +1,4 @@
 import copy
-import json
 
 
 class Language:
@@ -25,13 +24,6 @@ class ProblemConfig:
         self.language = {}
         for key, value in language.iteritems():
             self.language[key] = Language(**value)
-
-    def __str__(self):
-        return json.dumps(self.__dict__, default=lambda o: o.__dict__)
-
-    @classmethod
-    def from_string(cls, s):
-        return cls(**json.loads(s))
 
     def copy(self):
         return copy.deepcopy(self)

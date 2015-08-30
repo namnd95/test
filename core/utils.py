@@ -3,6 +3,7 @@ import subprocess
 import time
 from threading import Timer
 import signal
+import json
 
 
 class RunResult:
@@ -75,3 +76,11 @@ def get_name_part(file_name):
         return file_name
     else:
         return file_name[:seperation_index]
+
+
+def from_string(cls, s):
+    return cls(**json.loads(s))
+
+
+def to_string(obj):
+    return json.dumps(obj.__dict__, default=lambda o: o.__dict__)
