@@ -1,5 +1,7 @@
 import unittest
+
 import compare.tests
+import problem.tests
 
 
 def suite():
