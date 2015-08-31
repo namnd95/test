@@ -39,9 +39,9 @@ def run_process(command, timelimit=1000, memlimit=1024,
     # init stdin and stdout
     fi = None
     fo = subprocess.PIPE
-    if file_in != None:
+    if file_in is not None:
         fi = open(file_in, 'r')
-    if file_out != None:
+    if file_out is not None:
         fo = open(file_out, 'w')
 
     process = subprocess.Popen(command, stdin=fi, stdout=fo,
@@ -54,9 +54,9 @@ def run_process(command, timelimit=1000, memlimit=1024,
     timer.cancel()
 
     # close file if redirect stdin and stdout
-    if (file_in != None):
+    if (file_in is not None):
         fi.close()
-    if (file_out != None):
+    if (file_out is not None):
         fo.close()
 
     return RunResult(exit_code=process.returncode, stderr=stdout + stderr)

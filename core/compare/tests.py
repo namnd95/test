@@ -1,5 +1,7 @@
 import unittest
-import config, result
+
+import config
+import result
 from functions import *
 
 
