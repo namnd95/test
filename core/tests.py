@@ -3,6 +3,10 @@ import unittest
 import compare.tests
 import problem.tests
 
+import compare
+import problem
+import utils
+
 
 def suite():
     compare_tests = compare.tests.suite()
