@@ -30,8 +30,34 @@ class TestFunction(unittest.TestCase):
         ))
 
 
+class TestCompareFile(unittest.TestCase):
+
+    def test_word_ignore_space(self):
+        self.assertEqual(
+            config.get('word_ignore_space')('tests/1', 'tests/2').score, 1
+        )
+        self.assertEqual(
+            config.get('word_ignore_space')('tests/1', 'tests/3').score, 0
+        )
+
+    def test_float_ignore_space(self):
+        self.assertEqual(
+            config.get('float_ignore_space')(
+                'tests/1', 'tests/3', epsilon=1e-3).score,
+            1
+        )
+        self.assertEqual(
+            config.get('float_ignore_space')(
+                'tests/1', 'tests/3', epsilon=1e-5).score,
+            0
+        )
+
+
 def suite():
-    return unittest.TestLoader().loadTestsFromTestCase(TestFunction)
+    return unittest.TestSuite([
+        unittest.TestLoader().loadTestsFromTestCase(TestFunction),
+        unittest.TestLoader().loadTestsFromTestCase(TestCompareFile),
+    ])
 
 if __name__ == '__main__':
     unittest.TextTestRunner(verbosity=2).run(suite())

@@ -3,7 +3,7 @@ config = {}
 
 
 def get(name):
-    return cofig[name]
+    return config[name]
 
 
 def update(module):

@@ -31,7 +31,7 @@ def compare_ignore_space(output, answer, compare_function, **kargs):
         return Result(score=0, verdict='Lines mismatch')
     for i in xrange(len(out)):
         value = compare_line_ignore_space(
-            i + 1, out[i], ans[i], compare_function
+            i + 1, out[i], ans[i], compare_function, **kargs
         )
         if value is not None:
             return value
