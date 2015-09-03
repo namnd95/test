@@ -1,9 +1,13 @@
 import unittest
+import os
 
 import config
 import result
 from functions import *
 
+
+PATH = os.path.dirname(__file__)
+if len(PATH)>0: PATH=PATH+'/'
 
 class TestFunction(unittest.TestCase):
 
@@ -34,21 +38,25 @@ class TestCompareFile(unittest.TestCase):
 
     def test_word_ignore_space(self):
         self.assertEqual(
-            config.get('word_ignore_space')('tests/1', 'tests/2').score, 1
+            config.get('word_ignore_space')(
+                PATH+'tests/1', PATH+'tests/2'
+            ).score, 1
         )
         self.assertEqual(
-            config.get('word_ignore_space')('tests/1', 'tests/3').score, 0
+            config.get('word_ignore_space')(
+                PATH+'tests/1', PATH+'tests/3'
+            ).score, 0
         )
 
     def test_float_ignore_space(self):
         self.assertEqual(
             config.get('float_ignore_space')(
-                'tests/1', 'tests/3', epsilon=1e-3).score,
+                PATH+'tests/1', PATH+'tests/3', epsilon=1e-3).score,
             1
         )
         self.assertEqual(
             config.get('float_ignore_space')(
-                'tests/1', 'tests/3', epsilon=1e-5).score,
+                PATH+'tests/1', PATH+'tests/3', epsilon=1e-5).score,
             0
         )
 
