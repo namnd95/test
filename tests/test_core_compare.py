@@ -9,8 +9,10 @@ from core.compare.functions import *
 
 
 PATH = os.path.dirname(__file__)
-if len(PATH)==0: PATH='.'
-PATH = PATH+'/test_core_compare/'
+if len(PATH) == 0:
+    PATH = '.'
+PATH = PATH + '/test_core_compare/'
+
 
 class TestFunction(unittest.TestCase):
 
@@ -42,24 +44,24 @@ class TestCompareFile(unittest.TestCase):
     def test_word_ignore_space(self):
         self.assertEqual(
             config.get('word_ignore_space')(
-                PATH+'1', PATH+'2'
+                PATH + '1', PATH + '2'
             ).score, 1
         )
         self.assertEqual(
             config.get('word_ignore_space')(
-                PATH+'1', PATH+'3'
+                PATH + '1', PATH + '3'
             ).score, 0
         )
 
     def test_float_ignore_space(self):
         self.assertEqual(
             config.get('float_ignore_space')(
-                PATH+'1', PATH+'3', epsilon=1e-3).score,
+                PATH + '1', PATH + '3', epsilon=1e-3).score,
             1
         )
         self.assertEqual(
             config.get('float_ignore_space')(
-                PATH+'1', PATH+'3', epsilon=1e-5).score,
+                PATH + '1', PATH + '3', epsilon=1e-5).score,
             0
         )
 
