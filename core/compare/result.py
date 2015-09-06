@@ -7,8 +7,8 @@ class Result:
         self.score = score
         self.verdict = verdict
 
-    def getScore(self):
+    def get_score(self):
         return self.score
 
-    def getVerdict(self):
+    def get_verdict(self):
         return self.verdict

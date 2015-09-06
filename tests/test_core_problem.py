@@ -1,6 +1,7 @@
 import unittest
 import utils
 
+import core.problem
 import core.problem.config
 import core.problem.functions
 import core.problem.load_test_case

@@ -3,6 +3,7 @@ import os
 
 import utils
 
+import core.compare
 import core.compare.config
 import core.compare.result
 from core.compare.functions import *
@@ -45,23 +46,23 @@ class TestCompareFile(unittest.TestCase):
         self.assertEqual(
             config.get('word_ignore_space')(
                 PATH + '1', PATH + '2'
-            ).score, 1
+            ).get_score(), 1
         )
         self.assertEqual(
             config.get('word_ignore_space')(
                 PATH + '1', PATH + '3'
-            ).score, 0
+            ).get_score(), 0
         )
 
     def test_float_ignore_space(self):
         self.assertEqual(
             config.get('float_ignore_space')(
-                PATH + '1', PATH + '3', epsilon=1e-3).score,
+                PATH + '1', PATH + '3', epsilon=1e-3).get_score(),
             1
         )
         self.assertEqual(
             config.get('float_ignore_space')(
-                PATH + '1', PATH + '3', epsilon=1e-5).score,
+                PATH + '1', PATH + '3', epsilon=1e-5).get_score(),
             0
         )
 

@@ -4,6 +4,7 @@ import utils
 import test_core_compare
 import test_core_problem
 
+import core
 import core.compare
 import core.problem
 import core.utils
