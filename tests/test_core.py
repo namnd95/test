@@ -3,10 +3,12 @@ import unittest
 import utils
 import test_core_compare
 import test_core_problem
+import test_core_submission
 
 import core
 import core.compare
 import core.problem
+import core.submission
 import core.utils
 
 
