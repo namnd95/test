@@ -28,7 +28,7 @@ class RunResult:
 
 
 def run_process(command, timelimit=1000, memlimit=1024,
-                file_in=None, file_out=None, shell=False):
+                file_in=None, file_out=None, **kargs):
 
     class Alarm(Exception):
         pass
@@ -45,7 +45,7 @@ def run_process(command, timelimit=1000, memlimit=1024,
         fo = open(file_out, 'w')
 
     process = subprocess.Popen(command, stdin=fi, stdout=fo,
-                               stderr=subprocess.PIPE, shell=shell)
+                               stderr=subprocess.PIPE, **kagrs)
 
     kill_proc = lambda p: p.terminate()
     timer = Timer(timelimit, kill_proc, [process])
@@ -54,9 +54,9 @@ def run_process(command, timelimit=1000, memlimit=1024,
     timer.cancel()
 
     # close file if redirect stdin and stdout
-    if (file_in is not None):
+    if file_in is not None:
         fi.close()
-    if (file_out is not None):
+    if file_out is not None:
         fo.close()
 
     return RunResult(exit_code=process.returncode, stderr=stdout + stderr)
