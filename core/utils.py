@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import time
 from threading import Timer
@@ -68,6 +69,16 @@ def get_list_file(directory):
 
 def get_list_dir(directory):
     return os.walk(directory).next()[1]
+
+
+def copy_file(src, dst):
+    shutil.copyfile(src, dst)
+
+
+def remove_file_in_directory(directory):
+    for file in get_list_file(directory):
+        file_path = os.path.join(directory, file)
+        os.unlink(file_path)
 
 
 def get_name_part(file_name):
