@@ -13,14 +13,42 @@ DATA_PATH = '../../running_room/data/'
 
 def test_sequence(compare, run_command, test_cases,
                   subtasks=None, stop=False, **kargs):
+    test_case_results = []
     for test_case in testcases:
-        # check test for stop
-        # copy test case
+        # TODO check test for stop
+        # copy test
+        core.utils.copy(
+            test_case.get_file_in(),
+            DATA_PATH + problem.default_test_case.get_file_in()
+        )
+        
         # run test
-        # check test
+        file_in = None
+        file_out = None
+        if problem.config.get_stdin():
+            file_in = problem.default_test_case.get_file_in()
+        if problem.config.get_stdout():
+            file_out = problem.default_test_case.get_file_out()
+        run_result = core.utils.run_command(
+            run_command,
+            file_in=file_in,
+            file_out=file_out,
+            cwd=DATA_PATH
+        )
+        
+        # check test 
+        if run_result.get_exit_code() != 0:
+            test_case_results.append(Result(0, 'RE'))
+        else:
+            test_case_results.append( compare(
+                DATA_PATH+problem.default_test_case.get_file_out()
+                test_case.get_file_out()
+            ))
+                    
         # remove test case
-        # update stop for subtask
-        pass
+        core.utils.remove_file_in_directory(DATA_PATH)
+        
+        # TODO update stop for subtask        
 
 
 def get_params(problem):

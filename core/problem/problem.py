@@ -2,6 +2,7 @@ from core.utils import get_list_file, get_list_dir
 
 from functions import is_file_out, is_other_file
 from config import ProblemConfig, default_config
+from test_case import TestCase
 
 
 class Problem:
@@ -9,6 +10,14 @@ class Problem:
     def __init__(self, id, directory):
         self.id = id
         self.directory = directory
+        self.default_test_case = TestCase(
+            'default',
+            id + '.inp',
+            id + '.out',
+            time_limit=1.5,
+            mem_limit=1024,
+            score=1
+        )
 
     def load_config(self):
         try:
