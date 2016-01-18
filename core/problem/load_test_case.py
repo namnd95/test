@@ -28,7 +28,7 @@ def load_normal_test_cases(id, directory):
     for file in list_file:
         if is_file_out(file):
             list_file_out.append(file)
-        elif not is_other_file(file):
+        elif is_file_in(file):
             list_file_in.append(file)
 
     list_file_in.sort()
