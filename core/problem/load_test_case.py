@@ -12,7 +12,7 @@ def load_themis_test_cases(id, directory):
         list_file = get_list_file(path)[:2]
         file_in, file_out = list_file
         if is_file_out(file_in):
-            file_in, file_out = file_out, file_in        
+            file_in, file_out = file_out, file_in
         test_cases.append(TestCase(
             id=test_dir,
             file_in=path + file_in,

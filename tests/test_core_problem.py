@@ -73,14 +73,14 @@ class TestLoadTestCase(unittest.TestCase):
         self.check_list_test_case(
             [
                 core.problem.test_case.TestCase(
-                    'test1','divide.inp','divide.ans'
+                    'test1', 'divide.inp', 'divide.ans'
                 ),
                 core.problem.test_case.TestCase(
-                    'test2','divide.inp','divide.ans'
+                    'test2', 'divide.inp', 'divide.ans'
                 )
             ],
             core.problem.load_test_case.load_themis_test_cases(
-                'divide',PATH +'divide/'
+                'divide', PATH + 'divide/'
             )
         )
 
