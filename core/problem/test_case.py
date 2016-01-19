@@ -35,4 +35,7 @@ class TestCase:
         if self.score is not None:
             return self.score
         else:
-            return default_test_case.score
+            return default_test_case
+
+    def __repr__(self):
+        return self.id + ' ' + self.file_in + ' ' + self.file_out + ' '            
