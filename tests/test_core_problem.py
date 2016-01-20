@@ -15,6 +15,48 @@ if len(PATH) == 0:
 PATH = PATH + '/test_core_problem/'
 
 
+class TestTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.default_test_case = core.problem.test_case.TestCase(
+            'test', 'test.in', 'test.out',
+            1.0, 256, 1
+        )
+        self.test_case = core.problem.test_case.TestCase(
+            'test2', 'test2.inp', 'test2.ans'
+        )
+
+    def test_get_id(self):
+        self.assertEqual(self.default_test_case.get_id(), 'test')
+        self.assertEqual(self.test_case.get_id(), 'test2')
+
+    def test_get_file_in(self):
+        self.assertEqual(self.default_test_case.get_file_in(), 'test.in')
+        self.assertEqual(self.test_case.get_file_in(), 'test2.inp')
+
+    def test_get_file_out(self):
+        self.assertEqual(self.default_test_case.get_file_out(), 'test.out')
+        self.assertEqual(self.test_case.get_file_out(), 'test2.ans')
+
+    def test_get_time_limit(self):
+        self.assertAlmostEqual(self.default_test_case.get_time_limit(), 1.0)
+        self.assertAlmostEqual(
+            self.test_case.get_time_limit(self.default_test_case), 1.0
+        )
+
+    def test_get_mem_limit(self):
+        self.assertAlmostEqual(self.default_test_case.get_mem_limit(), 256)
+        self.assertAlmostEqual(
+            self.test_case.get_mem_limit(self.default_test_case), 256
+        )
+
+    def test_get_score(self):
+        self.assertAlmostEqual(self.default_test_case.get_score(), 1.0)
+        self.assertAlmostEqual(
+            self.test_case.get_score(self.default_test_case), 1.0
+        )
+
+
 class TestFunctions(unittest.TestCase):
 
     def setUp(self):
@@ -97,6 +139,7 @@ class TestLoadTestCase(unittest.TestCase):
 
 def suite():
     return unittest.TestSuite([
+        unittest.TestLoader().loadTestsFromTestCase(TestTestCase),
         unittest.TestLoader().loadTestsFromTestCase(TestFunctions),
         unittest.TestLoader().loadTestsFromTestCase(TestLoadTestCase),
     ])
