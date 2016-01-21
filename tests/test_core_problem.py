@@ -137,11 +137,63 @@ class TestLoadTestCase(unittest.TestCase):
         )
 
 
+class TestProblemConfig(unittest.TestCase):
+
+    def setUp(self):
+        self.default_config = core.problem.config.ProblemConfig(
+            stdin=True,
+            stdout=False,
+            stop=True,
+            language={
+                'c++': {
+                    'compile': 'g++ -g -std=gnu++11 $file  -o "$problem"',
+                    'run': '$problem',
+                },
+
+                'pas': {
+                    'compile': 'fpc -g $file  -o"$problem"',
+                    'run': './$problem',
+                },
+            }
+        )
+
+    def test_get_stdin(self):
+        self.assertTrue(self.default_config.get_stdin())
+
+    def test_get_stdout(self):
+        self.assertFalse(self.default_config.get_stdout())
+
+    def test_get_stop(self):
+        self.assertTrue(self.default_config.can_stop())
+
+    def test_get_compile_command(self):
+        self.assertEqual(
+            self.default_config.get_compile_command('c++'),
+            'g++ -g -std=gnu++11 $file  -o "$problem"'
+        )
+        self.assertEqual(
+            self.default_config.get_compile_command('pas'),
+            'fpc -g $file  -o"$problem"'
+        )
+
+    def test_get_run_command(self):
+        self.assertEqual(
+            self.default_config.get_run_command('c++'),
+            '$problem'
+        )
+
+        self.assertEqual(
+            self.default_config.get_run_command('pas'),
+            './$problem'
+        )
+
+
 def suite():
     return unittest.TestSuite([
         unittest.TestLoader().loadTestsFromTestCase(TestTestCase),
         unittest.TestLoader().loadTestsFromTestCase(TestFunctions),
         unittest.TestLoader().loadTestsFromTestCase(TestLoadTestCase),
+        unittest.TestLoader().loadTestsFromTestCase(TestProblemConfig),
     ])
 
 
