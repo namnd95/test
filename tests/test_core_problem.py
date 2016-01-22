@@ -55,6 +55,38 @@ class TestTestCase(unittest.TestCase):
         self.assertAlmostEqual(
             self.test_case.get_score(self.default_test_case), 1.0
         )
+        
+    def test_equal(self):
+        self.assertEqual(
+            self.default_test_case,
+            core.problem.test_case.TestCase(
+                'test', 'test.in', 'test.out',
+                1.0, 256, 1
+            )
+        )
+        
+        self.assertEqual(
+            self.test_case,
+            core.problem.test_case.TestCase(
+                'test2', 'test2.inp', 'test2.ans'
+            )
+        )
+        
+    def test_not_equal(self):
+        self.assertNotEqual(
+            self.default_test_case,
+            core.problem.test_case.TestCase(
+                'test', 'test.inp', 'test.out',
+                1.0, 256, 1
+            )
+        )
+
+        self.assertNotEqual(
+            self.test_case,
+            core.problem.test_case.TestCase(
+                'test2', 'test2.inp', 'test2.out'
+            )
+        )
 
 
 class TestFunctions(unittest.TestCase):

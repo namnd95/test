@@ -39,3 +39,8 @@ class TestCase:
 
     def __repr__(self):
         return self.id + ' ' + self.file_in + ' ' + self.file_out
+        
+    def __eq__(self, other):
+        return self.id == other.id and \
+            self.file_in == other.file_in and \
+            self.file_out == other.file_out        
