@@ -55,7 +55,7 @@ class TestTestCase(unittest.TestCase):
         self.assertAlmostEqual(
             self.test_case.get_score(self.default_test_case), 1.0
         )
-        
+
     def test_equal(self):
         self.assertEqual(
             self.default_test_case,
@@ -64,14 +64,14 @@ class TestTestCase(unittest.TestCase):
                 1.0, 256, 1
             )
         )
-        
+
         self.assertEqual(
             self.test_case,
             core.problem.test_case.TestCase(
                 'test2', 'test2.inp', 'test2.ans'
             )
         )
-        
+
     def test_not_equal(self):
         self.assertNotEqual(
             self.default_test_case,
@@ -220,12 +220,20 @@ class TestProblemConfig(unittest.TestCase):
         )
 
 
+class TestProblem(unittest.TestCase):
+
+    def setUp(self):
+        self.sum = core.problem.problem.Problem('sum', PATH + 'sum')
+        self.divide = core.problem.problem.Problem('divide', PATH + 'divide')
+
+
 def suite():
     return unittest.TestSuite([
         unittest.TestLoader().loadTestsFromTestCase(TestTestCase),
         unittest.TestLoader().loadTestsFromTestCase(TestFunctions),
         unittest.TestLoader().loadTestsFromTestCase(TestLoadTestCase),
         unittest.TestLoader().loadTestsFromTestCase(TestProblemConfig),
+        unittest.TestLoader().loadTestsFromTestCase(TestProblem),
     ])
 
 

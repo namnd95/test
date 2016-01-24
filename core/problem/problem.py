@@ -3,6 +3,7 @@ from core.utils import get_list_file, get_list_dir
 from functions import is_file_out, is_other_file
 from config import ProblemConfig, default_config
 from test_case import TestCase
+from load_test_case import load_themis_test_cases, load_normal_test_cases
 
 
 class Problem:
@@ -18,6 +19,8 @@ class Problem:
             mem_limit=1024,
             score=1
         )
+        self.load_config()
+        self.load_test_cases()
 
     def load_config(self):
         try:
@@ -33,9 +36,9 @@ class Problem:
 
     def load_test_cases(self):
         try:
-            self.read_test_case()
+            self.read_test_cases()
         except:
-            self.auto_load_test_case()
+            self.auto_load_test_cases()
 
     def read_test_cases(self):
         raise
