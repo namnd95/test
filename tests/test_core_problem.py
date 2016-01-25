@@ -7,7 +7,7 @@ import core.problem.config
 import core.problem.functions
 import core.problem.load_test_case
 import core.problem.problem
-import core.problem.test_case
+from core.problem.test_case import TestCase
 
 PATH = os.path.dirname(__file__)
 if len(PATH) == 0:
@@ -18,11 +18,11 @@ PATH = PATH + '/test_core_problem/'
 class TestTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.default_test_case = core.problem.test_case.TestCase(
+        self.default_test_case = TestCase(
             'test', 'test.in', 'test.out',
             1.0, 256, 1
         )
-        self.test_case = core.problem.test_case.TestCase(
+        self.test_case = TestCase(
             'test2', 'test2.inp', 'test2.ans'
         )
 
@@ -59,7 +59,7 @@ class TestTestCase(unittest.TestCase):
     def test_equal(self):
         self.assertEqual(
             self.default_test_case,
-            core.problem.test_case.TestCase(
+            TestCase(
                 'test', 'test.in', 'test.out',
                 1.0, 256, 1
             )
@@ -67,7 +67,7 @@ class TestTestCase(unittest.TestCase):
 
         self.assertEqual(
             self.test_case,
-            core.problem.test_case.TestCase(
+            TestCase(
                 'test2', 'test2.inp', 'test2.ans'
             )
         )
@@ -75,7 +75,7 @@ class TestTestCase(unittest.TestCase):
     def test_not_equal(self):
         self.assertNotEqual(
             self.default_test_case,
-            core.problem.test_case.TestCase(
+            TestCase(
                 'test', 'test.inp', 'test.out',
                 1.0, 256, 1
             )
@@ -83,7 +83,7 @@ class TestTestCase(unittest.TestCase):
 
         self.assertNotEqual(
             self.test_case,
-            core.problem.test_case.TestCase(
+            TestCase(
                 'test2', 'test2.inp', 'test2.out'
             )
         )
@@ -146,10 +146,10 @@ class TestLoadTestCase(unittest.TestCase):
     def test_load_themis_test_cases(self):
         self.check_list_test_case(
             [
-                core.problem.test_case.TestCase(
+                TestCase(
                     'test1', 'divide.inp', 'divide.ans'
                 ),
-                core.problem.test_case.TestCase(
+                TestCase(
                     'test2', 'divide.inp', 'divide.ans'
                 )
             ],
@@ -161,9 +161,9 @@ class TestLoadTestCase(unittest.TestCase):
     def test_load_normal_test_cases(self):
         self.check_list_test_case(
             [
-                core.problem.test_case.TestCase('1', '1.in', '1.out'),
-                core.problem.test_case.TestCase('2', '2.in', '2.out'),
-                core.problem.test_case.TestCase('3', '3.in', '3.out')
+                TestCase('1', '1.in', '1.out'),
+                TestCase('2', '2.in', '2.out'),
+                TestCase('3', '3.in', '3.out')
             ],
             core.problem.load_test_case.load_normal_test_cases('divide', PATH + 'sum/')
         )
@@ -225,6 +225,44 @@ class TestProblem(unittest.TestCase):
     def setUp(self):
         self.sum = core.problem.problem.Problem('sum', PATH + 'sum')
         self.divide = core.problem.problem.Problem('divide', PATH + 'divide')
+
+    def test_problem_test_cases(self):
+        self.assertEqual(
+            self.sum.test_cases,
+            [
+                TestCase(
+                    '1',
+                    PATH + 'sum/1.in',
+                    PATH + 'sum/1.out'
+                ),
+                TestCase(
+                    '2',
+                    PATH + 'sum/2.in',
+                    PATH + 'sum/2.out'
+                ),
+                TestCase(
+                    '3',
+                    PATH + 'sum/3.in',
+                    PATH + 'sum/3.out'
+                ),
+            ]
+        )
+
+        self.assertEqual(
+            self.divide.test_cases,
+            [
+                TestCase(
+                    'test1',
+                    PATH + 'divide/test1/divide.inp',
+                    PATH + 'divide/test1/divide.ans',
+                ),
+                TestCase(
+                    'test2',
+                    PATH + 'divide/test2/divide.inp',
+                    PATH + 'divide/test2/divide.ans',
+                ),
+            ]
+        )
 
 
 def suite():
