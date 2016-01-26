@@ -25,6 +25,8 @@ class TestTestCase(unittest.TestCase):
         self.test_case = TestCase(
             'test2', 'test2.inp', 'test2.ans'
         )
+        self.sum = core.problem.problem.Problem('sum', PATH + 'sum')
+        self.divide = core.problem.problem.Problem('divide', PATH + 'divide')
 
     def test_get_id(self):
         self.assertEqual(self.default_test_case.get_id(), 'test')
@@ -33,10 +35,24 @@ class TestTestCase(unittest.TestCase):
     def test_get_file_in(self):
         self.assertEqual(self.default_test_case.get_file_in(), 'test.in')
         self.assertEqual(self.test_case.get_file_in(), 'test2.inp')
+        self.assertEqual(
+            self.sum.test_cases[0].get_file_in(
+                self.sum), PATH + 'sum/1.in')
+        self.assertEqual(
+            self.divide.test_cases[0].get_file_in(self.divide),
+            PATH + 'divide/test1/divide.inp'
+        )
 
     def test_get_file_out(self):
         self.assertEqual(self.default_test_case.get_file_out(), 'test.out')
         self.assertEqual(self.test_case.get_file_out(), 'test2.ans')
+        self.assertEqual(
+            self.sum.test_cases[0].get_file_out(
+                self.sum), PATH + 'sum/1.out')
+        self.assertEqual(
+            self.divide.test_cases[0].get_file_out(self.divide),
+            PATH + 'divide/test1/divide.ans'
+        )
 
     def test_get_time_limit(self):
         self.assertAlmostEqual(self.default_test_case.get_time_limit(), 1.0)
@@ -127,30 +143,14 @@ class TestFunctions(unittest.TestCase):
 
 class TestLoadTestCase(unittest.TestCase):
 
-    def check_test_case(self, test_case_1, test_case_2):
-        self.assertEqual(test_case_1.id, test_case_2.id)
-        self.assertTrue(
-            (test_case_1.get_file_in() in test_case_2.get_file_in()) or
-            (test_case_2.get_file_in() in test_case_1.get_file_in())
-        )
-        self.assertTrue(
-            (test_case_1.get_file_out() in test_case_2.get_file_out()) or
-            (test_case_2.get_file_out() in test_case_1.get_file_out())
-        )
-
-    def check_list_test_case(self, list_test_case_1, list_test_case_2):
-        self.assertEqual(len(list_test_case_1), len(list_test_case_2))
-        for i in xrange(len(list_test_case_1)):
-            self.check_test_case(list_test_case_1[i], list_test_case_2[i])
-
     def test_load_themis_test_cases(self):
-        self.check_list_test_case(
+        self.assertEqual(
             [
                 TestCase(
-                    'test1', 'divide.inp', 'divide.ans'
+                    'test1', 'test1/divide.inp', 'test1/divide.ans'
                 ),
                 TestCase(
-                    'test2', 'divide.inp', 'divide.ans'
+                    'test2', 'test2/divide.inp', 'test2/divide.ans'
                 )
             ],
             core.problem.load_test_case.load_themis_test_cases(
@@ -159,7 +159,7 @@ class TestLoadTestCase(unittest.TestCase):
         )
 
     def test_load_normal_test_cases(self):
-        self.check_list_test_case(
+        self.assertEqual(
             [
                 TestCase('1', '1.in', '1.out'),
                 TestCase('2', '2.in', '2.out'),
@@ -230,37 +230,17 @@ class TestProblem(unittest.TestCase):
         self.assertEqual(
             self.sum.test_cases,
             [
-                TestCase(
-                    '1',
-                    PATH + 'sum/1.in',
-                    PATH + 'sum/1.out'
-                ),
-                TestCase(
-                    '2',
-                    PATH + 'sum/2.in',
-                    PATH + 'sum/2.out'
-                ),
-                TestCase(
-                    '3',
-                    PATH + 'sum/3.in',
-                    PATH + 'sum/3.out'
-                ),
+                TestCase('1', '1.in', '1.out'),
+                TestCase('2', '2.in', '2.out'),
+                TestCase('3', '3.in', '3.out'),
             ]
         )
 
         self.assertEqual(
             self.divide.test_cases,
             [
-                TestCase(
-                    'test1',
-                    PATH + 'divide/test1/divide.inp',
-                    PATH + 'divide/test1/divide.ans',
-                ),
-                TestCase(
-                    'test2',
-                    PATH + 'divide/test2/divide.inp',
-                    PATH + 'divide/test2/divide.ans',
-                ),
+                TestCase('test1', 'test1/divide.inp', 'test1/divide.ans'),
+                TestCase('test2', 'test2/divide.inp', 'test2/divide.ans'),
             ]
         )
 

@@ -15,8 +15,8 @@ def load_themis_test_cases(id, directory):
             file_in, file_out = file_out, file_in
         test_cases.append(TestCase(
             id=test_dir,
-            file_in=path + file_in,
-            file_out=path + file_out
+            file_in=test_dir + '/' + file_in,
+            file_out=test_dir + '/' + file_out
         ))
     return test_cases
 
@@ -35,13 +35,12 @@ def load_normal_test_cases(id, directory):
     list_file_out.sort()
 
     test_cases = []
-    path = directory + '/'
     for i in xrange(len(list_file_out)):
         file_in = list_file_in[i]
         file_out = list_file_out[i]
         test_cases.append(TestCase(
             id=get_name_part(file_in),
-            file_in=path + file_in,
-            file_out=path + file_out
+            file_in=file_in,
+            file_out=file_out
         ))
     return test_cases

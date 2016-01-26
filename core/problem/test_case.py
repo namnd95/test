@@ -13,11 +13,17 @@ class TestCase:
     def get_id(self):
         return self.id
 
-    def get_file_in(self):
-        return self.file_in
+    def get_file_in(self, problem=None):
+        if problem is None:
+            return self.file_in
+        else:
+            return problem.directory + '/' + self.file_in
 
-    def get_file_out(self):
-        return self.file_out
+    def get_file_out(self, problem=None):
+        if problem is None:
+            return self.file_out
+        else:
+            return problem.directory + '/' + self.file_out
 
     def get_time_limit(self, default_test_case=None):
         if self.time_limit is not None:
