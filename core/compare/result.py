@@ -12,3 +12,9 @@ class Result:
 
     def get_verdict(self):
         return self.verdict
+
+    def __eq__(self, other):
+        try:
+            return self.score == other.score and self.verdict == other.verdict
+        except:
+            return False

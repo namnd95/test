@@ -8,6 +8,8 @@ import core.compare.config
 import core.compare.result
 from core.compare.functions import *
 
+from core.compare.result import Result
+
 
 PATH = os.path.dirname(__file__)
 if len(PATH) == 0:
@@ -67,10 +69,31 @@ class TestCompareFile(unittest.TestCase):
         )
 
 
+class TestResult(unittest.TestCase):
+
+    def setUp(self):
+        self.result = Result(1, 'OK')
+
+    def test_get_score(self):
+        self.assertEqual(self.result.get_score(), 1)
+        self.assertNotEqual(self.result.get_score(), 1.5)
+
+    def test_get_verdict(self):
+        self.assertEqual(self.result.get_verdict(), 'OK')
+        self.assertNotEqual(self.result.get_verdict(), 'ok')
+
+    def test_equal(self):
+        self.assertEqual(self.result, Result(1, 'OK'))
+        self.assertNotEqual(self.result, Result(1, 'ok'))
+        self.assertNotEqual(self.result, Result(2, 'OK'))
+        self.assertFalse(self.result is None)
+
+
 def suite():
     return unittest.TestSuite([
         unittest.TestLoader().loadTestsFromTestCase(TestFunction),
         unittest.TestLoader().loadTestsFromTestCase(TestCompareFile),
+        unittest.TestLoader().loadTestsFromTestCase(TestResult),
     ])
 
 if __name__ == '__main__':
