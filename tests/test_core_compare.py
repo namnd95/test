@@ -87,6 +87,7 @@ class TestResult(unittest.TestCase):
         self.assertNotEqual(self.result, Result(1, 'ok'))
         self.assertNotEqual(self.result, Result(2, 'OK'))
         self.assertFalse(self.result is None)
+        self.assertFalse(self.result == 'abc')
 
 
 def suite():
