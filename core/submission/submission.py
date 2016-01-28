@@ -4,10 +4,10 @@ class Submission:
         self.problem = problem
         self.language = language
 
-    def set_test_case_results(test_case_results):
+    def set_test_case_results(self, test_case_results):
         self.test_case_results = test_case_results
 
-    def set_compile_message(compile_message):
+    def set_compile_message(self, compile_message):
         self.compile_message = compile_message
 
     def get_problem(self):
