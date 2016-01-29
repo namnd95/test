@@ -172,21 +172,12 @@ class TestLoadTestCase(unittest.TestCase):
 class TestProblemConfig(unittest.TestCase):
 
     def setUp(self):
-        self.default_config = core.problem.config.ProblemConfig(
-            stdin=True,
-            stdout=False,
-            stop=True,
-            language={
-                'c++': {
-                    'compile': 'g++ -g -std=gnu++11 $file  -o "$problem"',
-                    'run': '$problem',
-                },
+        file = open(PATH + '/' + 'config.json', 'r')
+        config_data = file.read()
+        file.close()
 
-                'pas': {
-                    'compile': 'fpc -g $file  -o"$problem"',
-                    'run': './$problem',
-                },
-            }
+        self.default_config = core.utils.from_string(
+            core.problem.config.ProblemConfig, config_data
         )
 
     def test_get_stdin(self):

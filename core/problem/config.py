@@ -1,4 +1,7 @@
 import copy
+import os
+
+import core.utils
 
 
 class Language:
@@ -47,13 +50,10 @@ class ProblemConfig:
         return self.language[language].get_run_command()
 
 
-default_config = ProblemConfig(
-    stdin=True,
-    stdout=True,
-    language={
-        'c++': {
-            'compile': 'g++ -g -Wall  -Wl,--stack=268435456 -std=gnu++11 $file  -o "$problem"',
-            'run': '$problem',
-        },
-    }
-)
+PATH = os.path.dirname(__file__)
+file = open(PATH + '/' + 'config.json', 'r')
+default_config_data = file.read()
+file.close()
+test = core.utils.from_string(ProblemConfig, default_config_data)
+
+default_config = core.utils.from_string(ProblemConfig, default_config_data)

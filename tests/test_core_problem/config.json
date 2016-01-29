@@ -1,0 +1,16 @@
+{  
+  "stdin":true,
+  "stdout":false,
+  "stop":true,
+  "language":{
+      "c++": {
+          "compile": "g++ -g -std=gnu++11 $file  -o \"$problem\"",
+          "run": "$problem"
+      },
+
+      "pas": {
+          "compile": "fpc -g $file  -o\"$problem\"",
+          "run": "./$problem"
+      }
+  }
+}
