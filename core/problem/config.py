@@ -44,10 +44,22 @@ class ProblemConfig:
         return self.language
 
     def get_compile_command(self, language):
-        return self.language[language].get_compile_command()
+        try:
+            return self.language[language].get_compile_command()
+        except:
+            if language in default_config.language:
+                return default_config.language[language].get_compile_command()
+            else:
+                return ''
 
     def get_run_command(self, language):
-        return self.language[language].get_run_command()
+        try:
+            return self.language[language].get_run_command()
+        except:
+            if language in default_config.language:
+                return default_config.language[language].get_run_command()
+            else:
+                return ''
 
 
 PATH = os.path.dirname(__file__)

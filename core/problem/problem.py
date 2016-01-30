@@ -28,9 +28,6 @@ class Problem:
         except:
             self.config = default_config.copy()
 
-        if not self.config.language:
-            self.config.language = default_config.language
-
     def read_config(self):
         raise
 
