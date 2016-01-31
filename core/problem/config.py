@@ -63,9 +63,7 @@ class ProblemConfig:
 
 
 PATH = os.path.dirname(__file__)
-file = open(PATH + '/' + 'config.json', 'r')
-default_config_data = file.read()
-file.close()
-test = core.utils.from_string(ProblemConfig, default_config_data)
-
-default_config = core.utils.from_string(ProblemConfig, default_config_data)
+default_config = core.utils.from_string(
+    ProblemConfig,
+    file_name=PATH + '/' + 'config.json'
+)

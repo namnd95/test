@@ -171,14 +171,15 @@ class TestLoadTestCase(unittest.TestCase):
 
 class TestProblemConfig(unittest.TestCase):
 
-    def setUp(self):
-        file = open(PATH + '/' + 'config.json', 'r')
-        config_data = file.read()
-        file.close()
-
-        self.default_config = core.utils.from_string(
-            core.problem.config.ProblemConfig, config_data
+    @classmethod
+    def setUpClass(cls):
+        cls.default_config = core.utils.from_string(
+            core.problem.config.ProblemConfig,
+            file_name=PATH + '/' + 'config.json'
         )
+
+    def setUp(self):
+        self.default_config = TestProblemConfig.default_config
 
     def test_get_stdin(self):
         self.assertTrue(self.default_config.get_stdin())

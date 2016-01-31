@@ -89,7 +89,13 @@ def get_name_part(file_name):
         return file_name[:seperation_index]
 
 
-def from_string(cls, s):
+def from_string(cls, s='', file_name=None):
+    try:
+        with open(file_name, 'r') as f:
+            s = f.read()
+    except:
+        pass
+
     return cls(**json.loads(s))
 
 
