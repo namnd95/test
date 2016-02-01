@@ -10,9 +10,7 @@ import core.problem.problem
 from core.problem.test_case import TestCase
 
 PATH = os.path.dirname(__file__)
-if len(PATH) == 0:
-    PATH = '.'
-PATH = PATH + '/test_core_problem/'
+PATH = os.path.join(PATH, 'test_core_problem')
 
 
 class TestTestCase(unittest.TestCase):
@@ -25,8 +23,10 @@ class TestTestCase(unittest.TestCase):
         self.test_case = TestCase(
             'test2', 'test2.inp', 'test2.ans'
         )
-        self.sum = core.problem.problem.Problem('sum', PATH + 'sum')
-        self.divide = core.problem.problem.Problem('divide', PATH + 'divide')
+        self.sum = core.problem.problem.Problem(
+            'sum', os.path.join(PATH, 'sum'))
+        self.divide = core.problem.problem.Problem(
+            'divide', os.path.join(PATH, 'divide'))
 
     def test_get_id(self):
         self.assertEqual(self.default_test_case.get_id(), 'test')
@@ -36,22 +36,24 @@ class TestTestCase(unittest.TestCase):
         self.assertEqual(self.default_test_case.get_file_in(), 'test.in')
         self.assertEqual(self.test_case.get_file_in(), 'test2.inp')
         self.assertEqual(
-            self.sum.test_cases[0].get_file_in(
-                self.sum), PATH + 'sum/1.in')
+            self.sum.test_cases[0].get_file_in(self.sum),
+            os.path.join(PATH, 'sum', '1.in')
+        )
         self.assertEqual(
             self.divide.test_cases[0].get_file_in(self.divide),
-            PATH + 'divide/test1/divide.inp'
+            os.path.join(PATH, 'divide', 'test1', 'divide.inp')
         )
 
     def test_get_file_out(self):
         self.assertEqual(self.default_test_case.get_file_out(), 'test.out')
         self.assertEqual(self.test_case.get_file_out(), 'test2.ans')
         self.assertEqual(
-            self.sum.test_cases[0].get_file_out(
-                self.sum), PATH + 'sum/1.out')
+            self.sum.test_cases[0].get_file_out(self.sum),
+            os.path.join(PATH, 'sum', '1.out')
+        )
         self.assertEqual(
             self.divide.test_cases[0].get_file_out(self.divide),
-            PATH + 'divide/test1/divide.ans'
+            os.path.join(PATH, 'divide', 'test1', 'divide.ans')
         )
 
     def test_get_time_limit(self):
@@ -147,14 +149,18 @@ class TestLoadTestCase(unittest.TestCase):
         self.assertEqual(
             [
                 TestCase(
-                    'test1', 'test1/divide.inp', 'test1/divide.ans'
+                    'test1',
+                    os.path.join('test1', 'divide.inp'),
+                    os.path.join('test1', 'divide.ans')
                 ),
                 TestCase(
-                    'test2', 'test2/divide.inp', 'test2/divide.ans'
+                    'test2',
+                    os.path.join('test2', 'divide.inp'),
+                    os.path.join('test2', 'divide.ans')
                 )
             ],
             core.problem.load_test_case.load_themis_test_cases(
-                'divide', PATH + 'divide/'
+                'divide', os.path.join(PATH, 'divide')
             )
         )
 
@@ -165,7 +171,9 @@ class TestLoadTestCase(unittest.TestCase):
                 TestCase('2', '2.in', '2.out'),
                 TestCase('3', '3.in', '3.out')
             ],
-            core.problem.load_test_case.load_normal_test_cases('divide', PATH + 'sum/')
+            core.problem.load_test_case.load_normal_test_cases(
+                'divide', os.path.join(PATH, 'sum')
+            )
         )
 
 
@@ -175,7 +183,7 @@ class TestProblemConfig(unittest.TestCase):
     def setUpClass(cls):
         cls.default_config = core.utils.from_string(
             core.problem.config.ProblemConfig,
-            file_name=PATH + '/' + 'config.json'
+            file_name=os.path.join(PATH, 'config.json')
         )
 
     def setUp(self):
@@ -215,8 +223,12 @@ class TestProblemConfig(unittest.TestCase):
 class TestProblem(unittest.TestCase):
 
     def setUp(self):
-        self.sum = core.problem.problem.Problem('sum', PATH + 'sum')
-        self.divide = core.problem.problem.Problem('divide', PATH + 'divide')
+        self.sum = core.problem.problem.Problem(
+            'sum', os.path.join(PATH, 'sum')
+        )
+        self.divide = core.problem.problem.Problem(
+            'divide', os.path.join(PATH, 'divide')
+        )
 
     def test_problem_test_cases(self):
         self.assertEqual(
@@ -231,8 +243,16 @@ class TestProblem(unittest.TestCase):
         self.assertEqual(
             self.divide.test_cases,
             [
-                TestCase('test1', 'test1/divide.inp', 'test1/divide.ans'),
-                TestCase('test2', 'test2/divide.inp', 'test2/divide.ans'),
+                TestCase(
+                    'test1',
+                    os.path.join('test1', 'divide.inp'),
+                    os.path.join('test1', 'divide.ans')
+                ),
+                TestCase(
+                    'test2',
+                    os.path.join('test2', 'divide.inp'),
+                    os.path.join('test2', 'divide.ans')
+                )
             ]
         )
 

@@ -1,3 +1,5 @@
+import os
+
 from core.utils import get_list_file, get_list_dir, get_name_part
 
 from functions import is_file_out, is_other_file, is_file_in
@@ -8,15 +10,15 @@ def load_themis_test_cases(id, directory):
     sub_dirs = get_list_dir(directory)
     test_cases = []
     for test_dir in sub_dirs:
-        path = directory + '/' + test_dir + '/'
+        path = os.path.join(directory, test_dir)
         list_file = get_list_file(path)[:2]
         file_in, file_out = list_file
         if is_file_out(file_in):
             file_in, file_out = file_out, file_in
         test_cases.append(TestCase(
             id=test_dir,
-            file_in=test_dir + '/' + file_in,
-            file_out=test_dir + '/' + file_out
+            file_in=os.path.join(test_dir, file_in),
+            file_out=os.path.join(test_dir, file_out)
         ))
     return test_cases
 

@@ -65,5 +65,5 @@ class ProblemConfig:
 PATH = os.path.dirname(__file__)
 default_config = core.utils.from_string(
     ProblemConfig,
-    file_name=PATH + '/' + 'config.json'
+    file_name=os.path.join(PATH, 'config.json')
 )
