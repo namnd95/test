@@ -90,11 +90,12 @@ def get_name_part(file_name):
 
 
 def from_string(cls, s='', file_name=None):
-    try:
-        with open(file_name, 'r') as f:
-            s = f.read()
-    except:
-        pass
+    if file_name is not None:
+        try:
+            with open(file_name, 'r') as f:
+                s = f.read()
+        except:
+            raise
 
     return cls(**json.loads(s))
 

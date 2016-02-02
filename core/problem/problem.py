@@ -1,4 +1,6 @@
-from core.utils import get_list_file, get_list_dir
+import os
+
+from core.utils import get_list_file, get_list_dir, from_string
 
 from functions import is_file_out, is_other_file
 from config import ProblemConfig, default_config
@@ -29,7 +31,10 @@ class Problem:
             self.config = default_config.copy()
 
     def read_config(self):
-        raise
+        self.config = from_string(
+            ProblemConfig,
+            file_name=os.path.join(self.directory, 'config.json')
+        )
 
     def load_test_cases(self):
         try:

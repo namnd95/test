@@ -230,6 +230,11 @@ class TestProblem(unittest.TestCase):
             'divide', os.path.join(PATH, 'divide')
         )
 
+    def test_read_config(self):
+        self.assertFalse(self.divide.config.get_stdin())
+        self.assertFalse(self.divide.config.get_stdout())
+        self.assertFalse(self.divide.config.can_stop())
+
     def test_problem_test_cases(self):
         self.assertEqual(
             self.sum.test_cases,
