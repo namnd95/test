@@ -48,7 +48,9 @@ def run_process(command, timelimit=1000, memlimit=1024,
     process = subprocess.Popen(command, stdin=fi, stdout=fo,
                                stderr=subprocess.PIPE, **kagrs)
 
-    kill_proc = lambda p: p.terminate()
+    def kill_proc(p):
+        p.terminate()
+
     timer = Timer(timelimit, kill_proc, [process])
     timer.start()
     stdout, stderr = process.communicate()
