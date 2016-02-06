@@ -73,7 +73,7 @@ def make_submission(problem, language, file):
     else:
         result.set_test_case_results(
             test_sequence(
-                problem.compare,
+                problem.config.get_compare(),
                 Template(problem.config.get_run_command()).substitute(params),
                 problem.test_cases,
             )

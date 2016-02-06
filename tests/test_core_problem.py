@@ -211,6 +211,18 @@ class TestProblemConfig(unittest.TestCase):
         self.assertTrue(core.problem.config.default_config.can_stop())
         self.assertFalse(self.config.can_stop())
 
+    def test_get_compare_name(self):
+        self.assertEqual(
+            core.problem.config.default_config.get_compare_name(),
+            'word_ignore_space'
+        )
+
+    def test_get_compare(self):
+        self.assertEqual(
+            core.problem.config.default_config.get_compare(),
+            core.compare.config.get('word_ignore_space')
+        )
+
     def test_get_compile_command(self):
         self.assertEqual(
             core.problem.config.default_config.get_compile_command('c++'),

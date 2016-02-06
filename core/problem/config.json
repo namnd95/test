@@ -1,6 +1,7 @@
 {
     "stdin": true,
     "stdout": true,
+	"compare": "word_ignore_space",
     "language": {
         "c++": {
             "compile": "g++ -g -Wall  -Wl,--stack=268435456 -std=gnu++11 $file  -o \"$problem\"",

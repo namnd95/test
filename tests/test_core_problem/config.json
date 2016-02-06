@@ -2,6 +2,7 @@
   "stdin":true,
   "stdout":false,
   "stop":true,
+  "compare": "word_ignore_space",
   "language":{
       "c++": {
           "compile": "g++ -g -std=gnu++11 $file  -o \"$problem\"",
