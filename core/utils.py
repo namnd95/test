@@ -28,7 +28,7 @@ class RunResult:
         return self.stderr
 
 
-def run_process(command, timelimit=1000, memlimit=1024,
+def run_process(command, timelimit=1, memlimit=1024,
                 file_in=None, file_out=None, **kargs):
 
     class Alarm(Exception):
@@ -46,10 +46,10 @@ def run_process(command, timelimit=1000, memlimit=1024,
         fo = open(file_out, 'w')
 
     process = subprocess.Popen(command, stdin=fi, stdout=fo,
-                               stderr=subprocess.PIPE, **kagrs)
+                               stderr=subprocess.PIPE, **kargs)
 
     def kill_proc(p):
-        p.terminate()
+        p.kill()
 
     timer = Timer(timelimit, kill_proc, [process])
     timer.start()
