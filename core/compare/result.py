@@ -18,3 +18,6 @@ class Result:
             return self.score == other.score and self.verdict == other.verdict
         except:
             return False
+
+    def __repr__(self):
+        return str(self.score) + ' ' + self.verdict
