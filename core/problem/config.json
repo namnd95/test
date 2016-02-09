@@ -4,7 +4,7 @@
 	"compare": "word_ignore_space",
     "language": {
         "c++": {
-            "compile": "g++ -g -Wall  -Wl,--stack,268435456 -std=c++0x $file  -o \"$problem\"",
+            "compile": "g++ -g -Wall -std=c++0x $file  -o \"$problem\"",
             "run": "./$problem"
         }
     }
