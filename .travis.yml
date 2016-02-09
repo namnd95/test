@@ -7,4 +7,4 @@ install:
 
 script:
   - "pep8 ."
-  - python tests.py
+  - python tests.py --all

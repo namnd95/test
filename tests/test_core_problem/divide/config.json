@@ -5,7 +5,7 @@
   "language":{
       "c++": {
           "compile": "g++ -g -std=gnu++11 $file  -o \"$problem\"",
-          "run": "$problem"
+          "run": "./$problem"
       }
   }
 }

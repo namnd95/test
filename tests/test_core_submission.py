@@ -1,3 +1,5 @@
+import os
+import sys
 import unittest
 
 import utils
@@ -8,6 +10,10 @@ import core.submission.functions
 
 from core.submission.submission import Submission
 from core.compare.result import Result
+from core.problem import Problem
+
+TEST_PATH = os.path.dirname(__file__)
+PATH = os.path.join(TEST_PATH, 'test_core_submission')
 
 
 class TestSubmission(unittest.TestCase):
@@ -42,9 +48,30 @@ class TestSubmission(unittest.TestCase):
         )
 
 
+@unittest.skipUnless(__name__ == '__main__' or '--all' in sys.argv, '')
+class TestMakeSubmission(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        PROBLEM_PATH = os.path.join(TEST_PATH, 'test_core_problem')
+        cls.sum = Problem('sum', os.path.join(PROBLEM_PATH, 'sum'))
+        cls.divide = Problem('divide', os.path.join(PROBLEM_PATH, 'divide'))
+
+    def test_full_sum(self):
+        result = core.submission.functions.make_submission(
+            TestMakeSubmission.sum, 'c++',
+            os.path.join(PATH, 'Full', 'sum.cpp')
+        )
+        self.assertEqual(
+            result.get_test_case_results(),
+            [Result(1, 'AC'), Result(1, 'AC'), Result(1, 'AC')]
+        )
+
+
 def suite():
     return unittest.TestSuite([
         unittest.TestLoader().loadTestsFromTestCase(TestSubmission),
+        unittest.TestLoader().loadTestsFromTestCase(TestMakeSubmission),
     ])
 
 

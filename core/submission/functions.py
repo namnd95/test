@@ -56,6 +56,7 @@ def test_sequence(compare, run_command, problem,
         core.utils.remove_file_in_directory(DATA_PATH)
 
         # TODO update stop for subtask
+    return test_case_results
 
 
 def get_params(file, problem):
@@ -68,7 +69,9 @@ def make_submission(problem, language, file):
         file,
         os.path.join(
             COMPILE_PATH,
-            os.path.basename(file)))
+            os.path.basename(file)
+        )
+    )
 
     params = get_params(os.path.basename(file), problem)
     result = Submission(problem, language)
@@ -76,9 +79,11 @@ def make_submission(problem, language, file):
     # compile code
     compile_result = core.utils.run_process(
         Template(
-            problem.config.get_compile_command(language)).substitute(params),
+            problem.config.get_compile_command(language)
+        ).substitute(params),
         cwd=COMPILE_PATH,
-        shell=True)
+        shell=True
+    )
 
     if compile_result.get_exit_code() != 0:
         result.set_compile_message(compile_result.get_stderr())

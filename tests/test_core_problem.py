@@ -247,12 +247,12 @@ class TestProblemConfig(unittest.TestCase):
     def test_get_run_command(self):
         self.assertEqual(
             core.problem.config.default_config.get_run_command('c++'),
-            '$problem'
+            './$problem'
         )
 
         self.assertEqual(
             core.problem.config.default_config.get_run_command('pas'),
-            './$problem'
+            '././$problem'
         )
 
         self.assertEqual(
@@ -263,7 +263,7 @@ class TestProblemConfig(unittest.TestCase):
         # Use default config
         self.assertEqual(
             self.config.get_run_command('pas'),
-            './$problem'
+            '././$problem'
         )
 
 
