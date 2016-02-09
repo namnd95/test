@@ -11,6 +11,7 @@ import core.submission.functions
 from core.submission.submission import Submission
 from core.compare.result import Result
 from core.problem import Problem
+import core.utils
 
 TEST_PATH = os.path.dirname(__file__)
 PATH = os.path.join(TEST_PATH, 'test_core_submission')
@@ -57,9 +58,29 @@ class TestMakeSubmission(unittest.TestCase):
         cls.sum = Problem('sum', os.path.join(PROBLEM_PATH, 'sum'))
         cls.divide = Problem('divide', os.path.join(PROBLEM_PATH, 'divide'))
 
+    def test_copy_and_compile_code(self):
+        file = os.path.join(PATH, 'Full', 'sum.cpp')
+        language = 'c++'
+        problem = self.sum
+        params = core.submission.functions.get_params(
+            os.path.basename(file), problem
+        )
+        core.submission.functions.copy_file_to_compile_path(
+            problem, language, file
+        )
+        compile_result = core.submission.functions.compile_code(
+            problem, language, file, params
+        )
+        core.utils.remove_file_in_directory(
+            core.submission.functions.COMPILE_PATH
+        )
+        if compile_result.get_exit_code() != 0:
+            print compile_result.get_stderr()
+            self.assertTrue(False)
+
     def test_full_sum(self):
         result = core.submission.functions.make_submission(
-            TestMakeSubmission.sum, 'c++',
+            self.sum, 'c++',
             os.path.join(PATH, 'Full', 'sum.cpp')
         )
         self.assertEqual(

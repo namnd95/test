@@ -63,20 +63,17 @@ def get_params(file, problem):
     return dict(file=file, problem=problem.id)
 
 
-def make_submission(problem, language, file):
-    # copy code
-    core.utils.copy_file(
-        file,
-        os.path.join(
-            COMPILE_PATH,
-            os.path.basename(file)
-        )
+def copy_file_to_compile_path(problem, language, file):
+    file_name = os.path.join(
+        COMPILE_PATH,
+        os.path.basename(file)
     )
 
-    params = get_params(os.path.basename(file), problem)
-    result = Submission(problem, language)
+    core.utils.copy_file(file, file_name)
+    return file_name
 
-    # compile code
+
+def compile_code(problem, language, file, params):
     compile_result = core.utils.run_process(
         Template(
             problem.config.get_compile_command(language)
@@ -84,7 +81,16 @@ def make_submission(problem, language, file):
         cwd=COMPILE_PATH,
         shell=True
     )
+    return compile_result
 
+
+def make_submission(problem, language, file):
+    # copy code
+    params = get_params(os.path.basename(file), problem)
+    copy_file_to_compile_path(problem, language, file)
+    compile_result = compile_code(problem, language, file, params)
+
+    result = Submission(problem, language)
     if compile_result.get_exit_code() != 0:
         result.set_compile_message(compile_result.get_stderr())
     else:
@@ -98,4 +104,5 @@ def make_submission(problem, language, file):
             )
         )
 
+    core.utils.remove_file_in_directory(COMPILE_PATH)
     return result
