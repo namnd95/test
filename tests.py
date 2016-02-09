@@ -1,3 +1,4 @@
+import sys
 import unittest
 
 import tests.test_core
@@ -10,4 +11,6 @@ def suite():
     return unittest.TestSuite([core_tests])
 
 if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(suite())
+    result = unittest.TextTestRunner(verbosity=2).run(suite())
+    if result.errors or result.failures:
+        sys.exit(1)
