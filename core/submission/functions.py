@@ -78,6 +78,7 @@ def compile_code(problem, language, file, params):
         Template(
             problem.config.get_compile_command(language)
         ).substitute(params),
+        timelimit=30,
         cwd=COMPILE_PATH,
         shell=True
     )

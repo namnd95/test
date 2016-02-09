@@ -75,7 +75,7 @@ class TestMakeSubmission(unittest.TestCase):
             core.submission.functions.COMPILE_PATH
         )
         if compile_result.get_exit_code() != 0:
-            print compile_result.get_stderr()
+            print compile_result.get_exit_code(), compile_result.get_stderr()
             self.assertTrue(False)
 
     def test_full_sum(self):

@@ -190,7 +190,7 @@ class TestProblemConfig(unittest.TestCase):
             stdin=False, stdout=False, stop=False,
             language={
                 "c++": {
-                    'compile': 'g++ -g -std=gnu++11 $file -O2 -o "$problem\"',
+                    'compile': 'g++ -g -std=c++0x $file -O2 -o "$problem\"',
                     "run": "$problem"
                 }
             }
@@ -226,7 +226,7 @@ class TestProblemConfig(unittest.TestCase):
     def test_get_compile_command(self):
         self.assertEqual(
             core.problem.config.default_config.get_compile_command('c++'),
-            'g++ -g -std=gnu++11 $file  -o "$problem"'
+            'g++ -g -std=c++0x $file  -o "$problem"'
         )
         self.assertEqual(
             core.problem.config.default_config.get_compile_command('pas'),
@@ -235,7 +235,7 @@ class TestProblemConfig(unittest.TestCase):
 
         self.assertEqual(
             self.config.get_compile_command('c++'),
-            'g++ -g -std=gnu++11 $file -O2 -o "$problem"'
+            'g++ -g -std=c++0x $file -O2 -o "$problem"'
         )
 
         # Use default config

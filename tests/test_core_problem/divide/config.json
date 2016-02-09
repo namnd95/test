@@ -4,7 +4,7 @@
   "stop":false,
   "language":{
       "c++": {
-          "compile": "g++ -g -std=gnu++11 $file  -o \"$problem\"",
+          "compile": "g++ -g -std=c++0x $file  -o \"$problem\"",
           "run": "./$problem"
       }
   }
