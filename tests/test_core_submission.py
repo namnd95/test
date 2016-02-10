@@ -88,6 +88,20 @@ class TestMakeSubmission(unittest.TestCase):
             [Result(1, 'AC'), Result(1, 'AC'), Result(1, 'AC')]
         )
 
+    def test_partial_sum(self):
+        result = core.submission.functions.make_submission(
+            self.sum, 'c++',
+            os.path.join(PATH, 'partial', 'sum.cpp')
+        )
+        self.assertEqual(
+            result.get_test_case_results(),
+            [
+                Result(0, 'Line 1 at 1 output -1 answer 3'),
+                Result(0, 'TLE'),
+                Result(0, 'RE')
+            ]
+        )
+
 
 def suite():
     return unittest.TestSuite([
