@@ -41,7 +41,7 @@ def test_sequence(compare, run_command, problem,
         # check test
         if run_result.get_exit_code() != 0:
             verdict = 'RE'
-            if run_result.get_exit_code() == 1:
+            if run_result.get_exit_code() in (1, -9):
                 verdict = 'TLE'
             test_case_results.append(Result(0, verdict))
         else:
