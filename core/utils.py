@@ -5,6 +5,28 @@ import time
 from threading import Timer
 import signal
 import json
+import sys
+
+# source
+# http://www.activestate.com/blog/2007/11/supressing-windows-error-report-messagebox-subprocess-and-ctypes
+
+
+def get_subprocess_flags():
+    if sys.platform.startswith("win"):
+        # Don't display the Windows GPF dialog if the invoked program dies.
+        # See comp.os.ms-windows.programmer.win32
+        # How to suppress crash notification dialog?, Jan 14,2004 -
+        # Raymond Chen's response [1]
+
+        import ctypes
+        SEM_NOGPFAULTERRORBOX = 0x0002  # From MSDN
+        ctypes.windll.kernel32.SetErrorMode(SEM_NOGPFAULTERRORBOX)
+        subprocess_flags = 0x8000000  # win32con.CREATE_NO_WINDOW?
+    else:
+        subprocess_flags = 0
+    return subprocess_flags
+
+SUBPROCESS_FLAGS = get_subprocess_flags()
 
 
 class RunResult:
@@ -47,7 +69,8 @@ def run_process(command, timelimit=1, memlimit=1024,
         fo = open(os.path.join(cwd, file_out), 'w')
 
     process = subprocess.Popen(command, stdin=fi, stdout=fo,
-                               stderr=subprocess.PIPE, cwd=cwd, **kargs)
+                               stderr=subprocess.PIPE, cwd=cwd,
+                               creationflags=SUBPROCESS_FLAGS, **kargs)
 
     def kill_proc(p):
         p.kill()
