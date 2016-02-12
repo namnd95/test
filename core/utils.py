@@ -93,11 +93,11 @@ def run_process(command, timelimit=1, memlimit=1024,
 
 
 def get_list_file(directory):
-    return os.walk(directory).next()[2]
+    return sorted(os.walk(directory).next()[2])
 
 
 def get_list_dir(directory):
-    return os.walk(directory).next()[1]
+    return sorted(os.walk(directory).next()[1])
 
 
 def copy_file(src, dst):
