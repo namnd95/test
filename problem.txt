@@ -1,0 +1,4 @@
+treasure D:/Problem/ad-hoc/Treasure/
+votree D:/AMM2/Contests/TMP/votree/
+game D:/Problem/Greedy/Game/
+bai6 D:/AMM2/Contests/TMP/bai6/
