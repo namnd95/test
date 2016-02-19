@@ -57,3 +57,6 @@ class Problem:
             self.test_cases = load_themis_test_cases(self.id, self.directory)
         else:
             self.test_cases = load_normal_test_cases(self.id, self.directory)
+
+    def __repr__(self):
+        return self.id + ' ' + self.directory + ' ' + str(len(self.test_cases))

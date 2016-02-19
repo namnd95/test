@@ -1,0 +1,8 @@
+{
+	"problem" : {
+		"id": "sum",
+		"directory": "tests/test_core_problem/sum"
+	},
+	"language" : "c++",
+	"file" : "tests/test_core_submission/full/sum.cpp"
+}
