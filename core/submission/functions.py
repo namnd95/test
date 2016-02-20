@@ -89,10 +89,18 @@ def compile_code(problem, language, file, params):
 
 
 def make_submission(problem, language, file):
-    # copy code
-    params = get_params(os.path.basename(file), problem)
-    copy_file_to_compile_path(problem, language, file)
-    compile_result = compile_code(problem, language, file, params)
+    compile_result = core.utils.RunResult(
+        exit_code=2,
+        stderr='No file'
+    )
+
+    try:
+        # copy code
+        params = get_params(os.path.basename(file), problem)
+        copy_file_to_compile_path(problem, language, file)
+        compile_result = compile_code(problem, language, file, params)
+    except:
+        pass
 
     result = Submission(problem, language)
     if compile_result.get_exit_code() != 0:

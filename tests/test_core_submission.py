@@ -78,6 +78,13 @@ class TestMakeSubmission(unittest.TestCase):
             print compile_result.get_exit_code(), compile_result.get_stderr()
             self.assertTrue(False)
 
+    def test_no_file(self):
+        result = core.submission.functions.make_submission(
+            self.sum, 'c++',
+            'sum.cpp'
+        )
+        self.assertEqual(result.get_compile_message(), 'No file')
+
     def test_full_sum(self):
         result = core.submission.functions.make_submission(
             self.sum, 'c++',
