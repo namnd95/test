@@ -85,6 +85,14 @@ class TestMakeSubmission(unittest.TestCase):
         )
         self.assertEqual(result.get_compile_message(), 'No file')
 
+    def test_compile_error(self):
+        result = core.submission.functions.make_submission(
+            self.sum, 'c++',
+            os.path.join(PATH, 'partial', 'sum.pas')
+        )
+        self.assertNotEqual(result.get_compile_message(), '')
+        self.assertNotEqual(result.get_compile_message(), 'No file')
+
     def test_full_sum(self):
         result = core.submission.functions.make_submission(
             self.sum, 'c++',
