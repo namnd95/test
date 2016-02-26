@@ -14,7 +14,7 @@ DATA_PATH = os.path.join(COMPILE_PATH, 'data')
 
 
 def test_sequence(compare, run_command, problem,
-                  subtasks=None, stop=False, **kargs):
+                  subtasks=None, stop=False, display=None, **kargs):
     test_case_results = []
     for test_case in problem.test_cases:
         # TODO check test for stop
@@ -55,6 +55,9 @@ def test_sequence(compare, run_command, problem,
                 )
             )
 
+        if display is not None:
+            display(test_case, test_case_results[-1])
+
         # remove test case
         core.utils.remove_file_in_directory(DATA_PATH)
 
@@ -88,7 +91,7 @@ def compile_code(problem, language, file, params):
     return compile_result
 
 
-def make_submission(problem, language, file):
+def make_submission(problem, language, file, display_compile=None, **kargs):
     compile_result = core.utils.RunResult(
         exit_code=2,
         stderr='No file'
@@ -102,6 +105,9 @@ def make_submission(problem, language, file):
     except:
         pass
 
+    if display_compile is not None:
+        display_compile(compile_result)
+
     result = Submission(problem, language)
     if compile_result.get_exit_code() != 0:
         result.set_compile_message(compile_result.get_stderr())
@@ -112,7 +118,8 @@ def make_submission(problem, language, file):
                 Template(
                     problem.config.get_run_command(language)
                 ).substitute(params),
-                problem
+                problem,
+                **kargs
             )
         )
 
