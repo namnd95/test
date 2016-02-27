@@ -1,3 +1,4 @@
+import os
 import sys
 
 import core
@@ -16,6 +17,7 @@ def display_compile(compile_result):
 class ProblemSubmission:
 
     def __init__(self, problem, language, file):
+        print problem
         self.problem = core.Problem(**problem)
 
         result = core.make_submission(
@@ -26,7 +28,12 @@ class ProblemSubmission:
         print result.get_test_case_results()
 
 
-prob_sub = core.utils.from_string(
-    ProblemSubmission,
-    file_name='local_test.json'
-)
+def run():
+    PATH = os.path.dirname(__file__)
+    prob_sub = core.utils.from_string(
+        ProblemSubmission,
+        file_name=os.path.join(PATH, 'local_test.json')
+    )
+
+if __name__ == '__main__':
+    run()
