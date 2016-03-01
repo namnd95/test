@@ -25,7 +25,8 @@ class ProblemSubmission:
             display_compile, display=display
         )
 
-        print result.get_test_case_results()
+        for result in result.get_test_case_results():
+            print result
 
 
 def run():
