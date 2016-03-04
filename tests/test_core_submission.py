@@ -25,15 +25,15 @@ class TestSubmission(unittest.TestCase):
     def test_test_case_results(self):
 
         self.submission.set_test_case_results(
-            [Result(1, '1'), Result(2, '2')]
+            {'1': Result(1, '1'), '2': Result(2, '2')}
         )
 
         self.assertEqual(
-            [Result(1, '1'), Result(2, '2')],
+            {'1': Result(1, '1'), '2': Result(2, '2')},
             self.submission.get_test_case_results()
         )
         self.assertNotEqual(
-            [Result(1, '2'), Result(2, '2')],
+            {'1': Result(1, '2'), '2': Result(2, '2')},
             self.submission.get_test_case_results()
         )
 
@@ -100,7 +100,11 @@ class TestMakeSubmission(unittest.TestCase):
         )
         self.assertEqual(
             result.get_test_case_results(),
-            [Result(1, 'AC'), Result(1, 'AC'), Result(1, 'AC')]
+            {
+                '1': Result(1, 'AC'),
+                '2': Result(1, 'AC'),
+                '3': Result(1, 'AC')
+            }
         )
 
     def test_partial_sum(self):
@@ -110,11 +114,11 @@ class TestMakeSubmission(unittest.TestCase):
         )
         self.assertEqual(
             result.get_test_case_results(),
-            [
-                Result(0, 'Line 1 at 1 output -1 answer 3'),
-                Result(0, 'TLE'),
-                Result(0, 'RE')
-            ]
+            {
+                '1': Result(0, 'Line 1 at 1 output -1 answer 3'),
+                '2': Result(0, 'TLE'),
+                '3': Result(0, 'RE')
+            }
         )
 
 

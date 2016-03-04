@@ -15,7 +15,7 @@ DATA_PATH = os.path.join(COMPILE_PATH, 'data')
 
 def test_sequence(compare, run_command, problem,
                   subtasks=None, stop=False, display=None, **kargs):
-    test_case_results = []
+    test_case_results = {}
     for test_case in problem.test_cases:
         # TODO check test for stop
         # copy test
@@ -43,16 +43,14 @@ def test_sequence(compare, run_command, problem,
             verdict = 'RE'
             if run_result.get_exit_code() in (1, -9):
                 verdict = 'TLE'
-            test_case_results.append(Result(0, verdict))
+            test_case_results[test_case.get_id()] = Result(0, verdict)
         else:
-            test_case_results.append(
-                compare(
-                    os.path.join(
-                        DATA_PATH,
-                        problem.default_test_case.get_file_out()
-                    ),
-                    test_case.get_file_out(problem)
-                )
+            test_case_results[test_case.get_id()] = compare(
+                os.path.join(
+                    DATA_PATH,
+                    problem.default_test_case.get_file_out()
+                ),
+                test_case.get_file_out(problem)
             )
 
         if display is not None:
