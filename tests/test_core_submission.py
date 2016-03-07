@@ -14,7 +14,8 @@ from core.problem import Problem
 import core.utils
 
 TEST_PATH = os.path.dirname(__file__)
-PATH = os.path.join(TEST_PATH, 'test_core_submission')
+PROBLEM_PATH = os.path.join(TEST_PATH, 'problems')
+PATH = os.path.join(TEST_PATH, 'submissions')
 
 
 class TestSubmission(unittest.TestCase):
@@ -54,7 +55,6 @@ class TestMakeSubmission(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        PROBLEM_PATH = os.path.join(TEST_PATH, 'test_core_problem')
         cls.sum = Problem('sum', os.path.join(PROBLEM_PATH, 'sum'))
         cls.divide = Problem('divide', os.path.join(PROBLEM_PATH, 'divide'))
 

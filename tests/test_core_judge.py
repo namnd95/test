@@ -8,7 +8,7 @@ import core.judge.config
 from core.judge.functions import *
 
 from core.compare.result import Result
-from core.problem.test_case import TestCase
+from core.test_case import TestCase
 
 PATH = os.path.dirname(__file__)
 if len(PATH) == 0:

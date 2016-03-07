@@ -1,11 +1,10 @@
 import os
 
 from core.utils import get_list_file, get_list_dir, from_string
+from core.test_case import load_themis_test_cases, load_normal_test_cases
+from core.test_case import TestCase
 
-from functions import is_file_out, is_other_file
 from config import ProblemConfig, default_config
-from test_case import TestCase
-from load_test_case import load_themis_test_cases, load_normal_test_cases
 
 
 class Problem:
