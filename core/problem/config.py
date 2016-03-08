@@ -3,6 +3,7 @@ import os
 
 import core.utils
 import core.compare
+import core.judge
 
 
 class Language:
@@ -20,12 +21,20 @@ class Language:
 
 class ProblemConfig:
 
-    def __init__(self, stdin=True, stdout=True, stop=False,
-                 compare='word_ignore_space', language={}, **kargs):
+    def __init__(
+            self,
+            stdin=True,
+            stdout=True,
+            stop=False,
+            compare='word_ignore_space',
+            judge='sum',
+            language={},
+            **kargs):
         self.stdin = stdin
         self.stdout = stdout
         self.stop = stop
         self.compare = compare
+        self.judge = judge
         self.language = {}
         for key, value in language.iteritems():
             self.language[key] = Language(**value)
@@ -50,6 +59,12 @@ class ProblemConfig:
 
     def get_compare(self):
         return core.compare.config.get(self.compare)
+
+    def get_judge_name(self):
+        return self.judge
+
+    def get_judge(self):
+        return core.judge.config.get(self.judge)
 
     def get_compile_command(self, language):
         try:

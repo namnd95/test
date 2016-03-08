@@ -2,6 +2,7 @@
     "stdin": true,
     "stdout": true,
 	"compare": "word_ignore_space",
+	"judge": "sum",
     "language": {
         "c++": {
             "compile": "g++ -g -Wall -std=c++0x $file  -o \"$problem\"",
