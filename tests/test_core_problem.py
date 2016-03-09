@@ -58,6 +58,18 @@ class TestProblemConfig(unittest.TestCase):
             core.compare.config.get('word_ignore_space')
         )
 
+    def test_get_judge_name(self):
+        self.assertEqual(
+            core.problem.config.default_config.get_judge_name(),
+            'sum'
+        )
+
+    def test_get_judge(self):
+        self.assertEqual(
+            core.problem.config.default_config.get_judge(),
+            core.judge.config.get('sum')
+        )
+
     def test_get_compile_command(self):
         self.assertEqual(
             core.problem.config.default_config.get_compile_command('c++'),
