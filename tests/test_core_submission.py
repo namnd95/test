@@ -24,6 +24,11 @@ class TestSubmission(unittest.TestCase):
         self.submission = Submission(None, None)
 
     def test_test_case_results(self):
+        # Initial value of test_case_results
+        self.assertEqual(
+            self.submission.get_test_case_results(),
+            {}
+        )
 
         self.submission.set_test_case_results(
             {'1': Result(1, '1'), '2': Result(2, '2')}

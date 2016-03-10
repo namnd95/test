@@ -3,6 +3,7 @@ class Submission:
     def __init__(self, problem, language):
         self.problem = problem
         self.language = language
+        self.test_case_results = {}
 
     def set_test_case_results(self, test_case_results):
         self.test_case_results = test_case_results
