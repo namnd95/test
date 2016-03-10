@@ -54,7 +54,7 @@ def test_sequence(compare, run_command, problem,
             )
 
         if display is not None:
-            display(test_case, test_case_results[-1])
+            display(test_case, test_case_results[test_case.get_id()])
 
         # remove test case
         core.utils.remove_file_in_directory(DATA_PATH)
@@ -121,5 +121,10 @@ def make_submission(problem, language, file, display_compile=None, **kargs):
             )
         )
 
+    result.set_score(problem.config.get_judge()(
+        problem.default_test_case,
+        problem.test_cases,
+        result.get_test_case_results()
+    ))
     core.utils.remove_file_in_directory(COMPILE_PATH)
     return result

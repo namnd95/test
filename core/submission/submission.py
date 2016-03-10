@@ -10,6 +10,9 @@ class Submission:
     def set_compile_message(self, compile_message):
         self.compile_message = compile_message
 
+    def set_score(self, score):
+        self.score = score
+
     def get_problem(self):
         return self.problem
 
@@ -21,3 +24,6 @@ class Submission:
 
     def get_compile_message(self):
         return self.compile_message
+
+    def get_score(self):
+        return self.score

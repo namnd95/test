@@ -25,8 +25,9 @@ class ProblemSubmission:
             display_compile, display=display
         )
 
-        for result in result.get_test_case_results():
-            print result
+        print result.get_score()
+        for id, result in result.get_test_case_results().iteritems():
+            print id, result
 
 
 def run():
