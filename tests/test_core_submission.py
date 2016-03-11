@@ -43,6 +43,13 @@ class TestSubmission(unittest.TestCase):
             self.submission.get_test_case_results()
         )
 
+    def test_score(self):
+        self.submission.set_score(5)
+        self.assertEqual(self.submission.get_score(), 5)
+
+        self.submission.set_score(3.0)
+        self.assertEqual(self.submission.get_score(), 3.0)
+
     def test_compile_messeage(self):
         self.submission.set_compile_message('ok')
         self.assertEqual(
@@ -97,6 +104,7 @@ class TestMakeSubmission(unittest.TestCase):
         )
         self.assertNotEqual(result.get_compile_message(), '')
         self.assertNotEqual(result.get_compile_message(), 'No file')
+        self.assertEqual(result.get_score(), 0)
 
     def test_full_sum(self):
         result = core.submission.functions.make_submission(
@@ -111,6 +119,7 @@ class TestMakeSubmission(unittest.TestCase):
                 '3': Result(1, 'AC')
             }
         )
+        self.assertEqual(result.get_score(), 3)
 
     def test_partial_sum(self):
         result = core.submission.functions.make_submission(
@@ -125,6 +134,7 @@ class TestMakeSubmission(unittest.TestCase):
                 '3': Result(0, 'RE')
             }
         )
+        self.assertEqual(result.get_score(), 0)
 
 
 def suite():
