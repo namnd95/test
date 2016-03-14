@@ -7,6 +7,7 @@ import utils
 import core.submission
 import core.submission.submission
 import core.submission.functions
+import core.submission.display
 
 from core.submission.submission import Submission
 from core.compare.result import Result

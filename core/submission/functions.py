@@ -5,6 +5,7 @@ from core.compare import Result
 import core.utils
 
 from submission import Submission
+from display import Display
 
 PATH = os.path.join(os.path.dirname(__file__), '..', '..')
 COMPILE_PATH = os.path.join(PATH, 'RunningRoom')
@@ -14,7 +15,8 @@ DATA_PATH = os.path.join(COMPILE_PATH, 'data')
 
 
 def test_sequence(compare, run_command, problem,
-                  subtasks=None, stop=False, display=None, **kargs):
+                  subtasks=None, stop=False, displayClass=Display, **kargs):
+    display = displayClass(problem)
     test_case_results = {}
     for test_case in problem.test_cases:
         # TODO check test for stop
@@ -54,7 +56,7 @@ def test_sequence(compare, run_command, problem,
             )
 
         if display is not None:
-            display(test_case, test_case_results[test_case.get_id()])
+            display.show(test_case, test_case_results[test_case.get_id()])
 
         # remove test case
         core.utils.remove_file_in_directory(DATA_PATH)

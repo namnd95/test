@@ -1,8 +1,8 @@
 {
 	"problem" : {
 		"id": "sum",
-		"directory": "F:/AMM2/Contests/SPOJ/VMROPES/"
+		"directory": "tests/problems/sum"
 	},
 	"language" : "c++",
-	"file" : "D:/BT/SPOJ/vmropes.cpp"
+	"file" : "tests/submissions/full/sum.cpp"
 }

@@ -5,9 +5,11 @@ import core
 import core.utils
 
 
-def display(test_case, test_case_result):
-    print 'Finish ' + test_case.__repr__()
-    sys.stdout.flush()
+class LocalDisplay(core.submission.Display):
+
+    def show(self, test_case, test_case_result):
+        print 'Finish ' + test_case.__repr__()
+        sys.stdout.flush()
 
 
 def display_compile(compile_result):
@@ -22,7 +24,7 @@ class ProblemSubmission:
 
         result = core.make_submission(
             self.problem, language, file,
-            display_compile, display=display
+            display_compile, displayClass=LocalDisplay
         )
 
         print result.get_score()
